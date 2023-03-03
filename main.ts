@@ -1,55 +1,12 @@
 namespace SpriteKind {
     export const thing = SpriteKind.create()
     export const victim = SpriteKind.create()
+    export const thing2cloth = SpriteKind.create()
+    export const Bob_ = SpriteKind.create()
+    export const Cloth = SpriteKind.create()
+    export const Bob_1 = SpriteKind.create()
+    export const Bob = SpriteKind.create()
 }
-sprites.onOverlap(SpriteKind.Player, SpriteKind.victim, function (sprite, otherSprite) {
-    game.showLongText("Joe:- First you want to wash your cut.", DialogLayout.Top)
-    pause(1000)
-    mySprite2.setImage(img`
-        . . . . f f f f f f . . . . . . 
-        . . . f 2 f e e e e f f . . . . 
-        . . f 2 2 2 f e e e e f f . . . 
-        . . f e e e e f f e e e f . . . 
-        . f e 2 2 2 2 e e f f f f . . . 
-        . f 2 e f f f f 2 2 2 e f . . . 
-        . f f f e e e f f f f f f f . . 
-        . f e e 4 4 f b e 4 4 e f f . . 
-        . . f e d d f 1 4 d 4 e e f . . 
-        . . . f d d d d 4 e e e f . . . 
-        . . . f e 4 4 4 e e f f . . . . 
-        . . . f 2 2 2 e d 2 4 . . . . . 
-        . . . f 2 2 2 e d 2 e . . . . . 
-        . . . f 5 5 4 f e 2 f . . . . . 
-        . . . . f f f f 2 2 . . . . . . 
-        . . . . . . f f 2 . . . . . . . 
-        `)
-    pause(1000)
-    game.showLongText("Pick up the cloth", DialogLayout.Top)
-    mySprite4 = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . 1 1 1 1 1 . . . . . 
-        . . . 1 1 1 1 1 1 1 1 1 1 1 . . 
-        . . . 1 1 1 1 1 1 1 1 1 1 1 . . 
-        . . . 1 1 1 1 1 1 1 1 1 1 1 1 . 
-        . . . 1 1 1 1 1 1 1 1 1 1 1 1 1 
-        . . . . 1 1 1 1 1 1 1 1 1 1 1 1 
-        . . . . . 1 1 1 1 1 1 1 1 1 1 1 
-        . . . . . 1 1 1 1 1 1 1 1 1 1 1 
-        . . . . . . 1 1 1 1 1 1 1 1 1 1 
-        . . . . . . 1 1 1 1 1 1 1 1 1 1 
-        . . . . . . 1 1 1 1 1 1 1 1 1 1 
-        . . . . . . . 1 1 1 1 1 1 1 1 1 
-        . . . . . . . . . . 1 1 1 1 1 1 
-        `, SpriteKind.thing)
-    mySprite4.setPosition(23, 82)
-    pause(500)
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.thing, function (sprite, otherSprite) {
-    sprites.destroy(mySprite3)
-    game.showLongText("Move to Bob using your keys.", DialogLayout.Top)
-})
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     mySprite,
@@ -978,7 +935,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.stopAnimation(animation.AnimationTypes.All, mySprite)
     mySprite.vx += -7
     pause(100)
-    mySprite2 = sprites.create(img`
+    BobC = sprites.create(img`
         . . . . f f f f f f . . . . . . 
         . . . f 2 f e e e e f f . . . . 
         . . f 2 2 2 f e e e e f f . . . 
@@ -995,12 +952,13 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . f 5 5 4 f e e f . . . . . 
         . . . . f f f f f f . . . . . . 
         . . . . . . f f f . . 2 2 2 2 . 
-        `, SpriteKind.victim)
-    mySprite2.setPosition(113, 87)
+        `, SpriteKind.Bob)
+    BobC.setPosition(113, 87)
     game.showLongText("OUCH! That hurts", DialogLayout.Top)
     game.showLongText("Joe:- What happened Bob? Why are you screaming?", DialogLayout.Top)
     game.showLongText("Bob:- I was picking flowers, but a thorn gave me a painful cut!", DialogLayout.Top)
-    game.showLongText("Joe:- Ah, I see, you can expect bleeding, pain and problems in movement.", DialogLayout.Top)
+    game.showLongText("Joe:- As I can see, YOU ARE BLEEDING!", DialogLayout.Top)
+    game.showLongText("Bob:- YES I KNOW, AND PLEASE STOP IT!", DialogLayout.Top)
     game.showLongText("Joe:- Let me help", DialogLayout.Top)
     controller.moveSprite(mySprite, 50, 0)
     mySprite3 = sprites.create(img`
@@ -1028,9 +986,135 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite3.setPosition(29, 82)
     game.showLongText("Use A and D keys to move and pick up the water bottle.", DialogLayout.Top)
 })
-let mySprite3: Sprite = null
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Bob, function (sprite, otherSprite) {
+    game.showLongText("Joe:- First you want to wash your cut.", DialogLayout.Top)
+    pause(1000)
+    sprites.destroy(BobC)
+    BobC = sprites.create(img`
+        . . . . f f f f f f . . . . . . 
+        . . . f 2 f e e e e f f . . . . 
+        . . f 2 2 2 f e e e e f f . . . 
+        . . f e e e e f f e e e f . . . 
+        . f e 2 2 2 2 e e f f f f . . . 
+        . f 2 e f f f f 2 2 2 e f . . . 
+        . f f f e e e f f f f f f f . . 
+        . f e e 4 4 f b e 4 4 e f f . . 
+        . . f e d d f 1 4 d 4 e e f . . 
+        . . . f d d d d 4 e e e f . . . 
+        . . . f e 4 4 4 e e f f . . . . 
+        . . . f 2 2 2 e d 2 4 . . . . . 
+        . . . f 2 2 2 e d 2 e . . . . . 
+        . . . f 5 5 4 f e 2 f . . . . . 
+        . . . . f f f f 2 2 . . . . . . 
+        . . . . . . f f 2 . . . . . . . 
+        `, SpriteKind.Bob)
+    BobC.setPosition(113, 87)
+    pause(1000)
+    game.showLongText("Pick up the cloth", DialogLayout.Top)
+    mySprite4 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . 1 1 1 1 1 . . . . . 
+        . . . 1 1 1 1 1 1 1 1 1 1 1 . . 
+        . . . 1 1 1 1 1 1 1 1 1 1 1 . . 
+        . . . 1 1 1 1 1 1 1 1 1 1 1 1 . 
+        . . . 1 1 1 1 1 1 1 1 1 1 1 1 1 
+        . . . . 1 1 1 1 1 1 1 1 1 1 1 1 
+        . . . . . 1 1 1 1 1 1 1 1 1 1 1 
+        . . . . . 1 1 1 1 1 1 1 1 1 1 1 
+        . . . . . . 1 1 1 1 1 1 1 1 1 1 
+        . . . . . . 1 1 1 1 1 1 1 1 1 1 
+        . . . . . . 1 1 1 1 1 1 1 1 1 1 
+        . . . . . . . 1 1 1 1 1 1 1 1 1 
+        . . . . . . . . . . 1 1 1 1 1 1 
+        `, SpriteKind.victim)
+    mySprite4.setPosition(23, 82)
+    pause(500)
+    sprites.destroy(BobC)
+    BobC = sprites.create(img`
+        . . . . f f f f f f . . . . . . 
+        . . . f 2 f e e e e f f . . . . 
+        . . f 2 2 2 f e e e e f f . . . 
+        . . f e e e e f f e e e f . . . 
+        . f e 2 2 2 2 e e f f f f . . . 
+        . f 2 e f f f f 2 2 2 e f . . . 
+        . f f f e e e f f f f f f f . . 
+        . f e e 4 4 f b e 4 4 e f f . . 
+        . . f e d d f 1 4 d 4 e e f . . 
+        . . . f d d d d 4 e e e f . . . 
+        . . . f e 4 4 4 e e f f . . . . 
+        . . . f 2 2 2 e d 2 4 . . . . . 
+        . . . f 2 2 2 e d 2 e . . . . . 
+        . . . f 5 5 4 f e 2 f . . . . . 
+        . . . . f f f f 2 2 . . . . . . 
+        . . . . . . f f 2 . . . . . . . 
+        `, SpriteKind.Bob_)
+    BobC.setPosition(113, 87)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherSprite) {
+    sprites.destroy(mySprite5)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.victim, function (sprite, otherSprite) {
+    sprites.destroy(mySprite4)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.thing, function (sprite, otherSprite) {
+    sprites.destroy(mySprite3)
+    game.showLongText("Move to Bob using your keys.", DialogLayout.Top)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Bob_, function (sprite, otherSprite) {
+    game.showLongText("Joe:- Now we want to apply direct pressure to stop bleeding.", DialogLayout.Top)
+    pause(1000)
+    sprites.destroy(BobC)
+    BobC = sprites.create(img`
+        . . . . f f f f f f . . . . . . 
+        . . . f 2 f e e e e f f . . . . 
+        . . f 2 2 2 f e e e e f f . . . 
+        . . f e e e e f f e e e f . . . 
+        . f e 2 2 2 2 e e f f f f . . . 
+        . f 2 e f f f f 2 2 2 e f . . . 
+        . f f f e e e f f f f f f f . . 
+        . f e e 4 4 f b e 4 4 e f f . . 
+        . . f e d d f 1 4 d 4 e e f . . 
+        . . . f d d d d 4 e e e f . . . 
+        . . . f e 4 4 4 e e f f . . . . 
+        . . . f 2 2 2 e d 3 4 f . . . . 
+        . . . f 2 2 2 e d 3 e f . . . . 
+        . . . f 5 5 4 f e e f . . . . . 
+        . . . . f f f f f f . . . . . . 
+        . . . . . . f f f . . . . . . . 
+        `, SpriteKind.Bob_1)
+    BobC.setPosition(113, 87)
+    pause(1000)
+    game.showLongText("Pick up the ointment", DialogLayout.Top)
+    mySprite5 = sprites.create(img`
+        ....................
+        ....................
+        ....................
+        ....................
+        ....................
+        ....................
+        ........dd55........
+        ........5555........
+        .........44.........
+        ........5555........
+        ........5d55........
+        .......5d5555.......
+        .......d55555.......
+        .......555555.......
+        .......555555.......
+        .......555555.......
+        .......555555.......
+        ........5555........
+        ........4444........
+        ....................
+        `, SpriteKind.Player)
+    mySprite5.setPosition(23, 82)
+})
+let mySprite5: Sprite = null
 let mySprite4: Sprite = null
-let mySprite2: Sprite = null
+let mySprite3: Sprite = null
+let BobC: Sprite = null
 let mySprite: Sprite = null
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
